@@ -12,7 +12,12 @@ class GroupsController < ApplicationController
   def new; end
 
   def create
-    @group = Group.new(groups_params)
+    if current_user == nil
+      #redirect_to "index"
+      return
+    end
+
+    @group = Group.new(groups_params.merge(owner_id: current_user.id))
 
     if @group.save
       redirect_to @group
