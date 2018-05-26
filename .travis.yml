@@ -1,0 +1,6 @@
+language: ruby
+bundler_args: "--without production"
+services:
+- postgresql
+notifications:
+    slack: team-michal-power:TqeARpPrIiwgqZA1LsF8MRoP
