@@ -21,7 +21,9 @@ class GroupsController < ApplicationController
     end
   end
 
-  def add_user; end
+  def add_user
+    # potrzebna relacja do userow
+  end
 
   private
 

@@ -12,5 +12,5 @@
 <% end %>
 
 <% @groups.each do |group| %>
-    <p><%= group.name%></p>
+    <p><%= group.name%> [user <%= group.owner_id%>]</p>
 <% end %>
