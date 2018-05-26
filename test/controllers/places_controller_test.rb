@@ -1,4 +1,6 @@
-require 'test_helper'
+# frozen_string_literal: true
+
+require "test_helper"
 
 class PlacesControllerTest < ActionDispatch::IntegrationTest
   setup do
@@ -16,7 +18,7 @@ class PlacesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create place" do
-    assert_difference('Place.count') do
+    assert_difference("Place.count") do
       post places_url, params: { place: { description: @place.description, lat: @place.lat, lng: @place.lng, name: @place.name } }
     end
 
@@ -39,7 +41,7 @@ class PlacesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy place" do
-    assert_difference('Place.count', -1) do
+    assert_difference("Place.count", -1) do
       delete place_url(@place)
     end
 
