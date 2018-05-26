@@ -1,0 +1,16 @@
+<h1>Groups</h1>
+
+<%= form_with scope: :group, url: groups_path, local: true do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<% @groups.each do |group| %>
+    <p><%= group.name%></p>
+<% end %>
