@@ -2,8 +2,5 @@ language: ruby
 bundler_args: "--without production"
 services:
 - postgresql
-before_script:
-- psql -c 'create database place-x_test;' -U postgres
-- bundle exec rake db:reset RAILS_ENV=test
 notifications:
     slack: team-michal-power:TqeARpPrIiwgqZA1LsF8MRoP
