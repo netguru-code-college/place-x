@@ -2,6 +2,7 @@
 
 class PlacesController < ApplicationController
   before_action :set_place, only: [:show, :edit, :update, :destroy]
+  before_action :initialize_markers, only: [:index]
 
   # GET /places
   # GET /places.json
@@ -11,7 +12,8 @@ class PlacesController < ApplicationController
 
   # GET /places/1
   # GET /places/1.json
-  def show; end
+  def show;
+  end
 
   # GET /places/new
   def new
@@ -19,7 +21,8 @@ class PlacesController < ApplicationController
   end
 
   # GET /places/1/edit
-  def edit; end
+  def edit;
+  end
 
   # POST /places
   # POST /places.json
@@ -28,11 +31,11 @@ class PlacesController < ApplicationController
 
     respond_to do |format|
       if @place.save
-        format.html { redirect_to @place, notice: "Place was successfully created." }
-        format.json { render :show, status: :created, location: @place }
+        format.html {redirect_to @place, notice: "Place was successfully created."}
+        format.json {render :show, status: :created, location: @place}
       else
-        format.html { render :new }
-        format.json { render json: @place.errors, status: :unprocessable_entity }
+        format.html {render :new}
+        format.json {render json: @place.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -42,11 +45,11 @@ class PlacesController < ApplicationController
   def update
     respond_to do |format|
       if @place.update(place_params)
-        format.html { redirect_to @place, notice: "Place was successfully updated." }
-        format.json { render :show, status: :ok, location: @place }
+        format.html {redirect_to @place, notice: "Place was successfully updated."}
+        format.json {render :show, status: :ok, location: @place}
       else
-        format.html { render :edit }
-        format.json { render json: @place.errors, status: :unprocessable_entity }
+        format.html {render :edit}
+        format.json {render json: @place.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -56,12 +59,19 @@ class PlacesController < ApplicationController
   def destroy
     @place.destroy
     respond_to do |format|
-      format.html { redirect_to places_url, notice: "Place was successfully destroyed." }
-      format.json { head :no_content }
+      format.html {redirect_to places_url, notice: "Place was successfully destroyed."}
+      format.json {head :no_content}
     end
   end
 
   private
+
+  def initialize_markers
+    @markers = Gmaps4rails.build_markers(Place.all) do |place, marker|
+      marker.lat place.lat
+      marker.lng place.lng
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_place
