@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlacesController < ApplicationController
   before_action :set_place, only: [:show, :edit, :update, :destroy]
 
@@ -9,8 +11,7 @@ class PlacesController < ApplicationController
 
   # GET /places/1
   # GET /places/1.json
-  def show
-  end
+  def show; end
 
   # GET /places/new
   def new
@@ -18,8 +19,7 @@ class PlacesController < ApplicationController
   end
 
   # GET /places/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /places
   # POST /places.json
@@ -28,7 +28,7 @@ class PlacesController < ApplicationController
 
     respond_to do |format|
       if @place.save
-        format.html { redirect_to @place, notice: 'Place was successfully created.' }
+        format.html { redirect_to @place, notice: "Place was successfully created." }
         format.json { render :show, status: :created, location: @place }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PlacesController < ApplicationController
   def update
     respond_to do |format|
       if @place.update(place_params)
-        format.html { redirect_to @place, notice: 'Place was successfully updated.' }
+        format.html { redirect_to @place, notice: "Place was successfully updated." }
         format.json { render :show, status: :ok, location: @place }
       else
         format.html { render :edit }
@@ -56,19 +56,20 @@ class PlacesController < ApplicationController
   def destroy
     @place.destroy
     respond_to do |format|
-      format.html { redirect_to places_url, notice: 'Place was successfully destroyed.' }
+      format.html { redirect_to places_url, notice: "Place was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_place
-      @place = Place.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def place_params
-      params.require(:place).permit(:name, :description, :lat, :lng)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_place
+    @place = Place.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def place_params
+    params.require(:place).permit(:name, :description, :lat, :lng)
+  end
 end
