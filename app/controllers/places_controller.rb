@@ -46,8 +46,10 @@ class PlacesController < ApplicationController
   # PATCH/PUT /places/1
   # PATCH/PUT /places/1.json
   def update
+    # binding.pry
     respond_to do |format|
       if @place.update(place_params)
+        @place.tag_list.add(place_params[:tag_list])
         format.html { redirect_to @place, notice: "Place was successfully updated." }
         format.json { render :show, status: :ok, location: @place }
       else
