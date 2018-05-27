@@ -3,11 +3,8 @@
 <head>
   <title>PlaceX</title>
 
-  <script src="//maps.googleapis.com/maps/api/js?libraries=places&key=<%= raw ENV['MAPS_API_KEY'] %>"></script>
-  <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
-
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%#= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   <script type="text/javascript">
       function initializeMap() {
@@ -19,7 +16,9 @@
           });
       }
 
-      window.onload = initializeMap;
+      $(document).ready(initializeMap);
+      $(document).on('page:load', initializeMap); // Classic Turbolinks
+      $(document).on('turbolinks:load', initializeMap); // Turbolinks 5
   </script>
 </head>
 <body>
