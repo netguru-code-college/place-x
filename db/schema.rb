@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 2018_05_27_074103) do
   create_table "groups_users", id: false, force: :cascade do |t|
     t.bigint "group_id", null: false
     t.bigint "user_id", null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "body"
     t.bigint "place_id"
@@ -61,5 +63,4 @@ ActiveRecord::Schema.define(version: 2018_05_27_074103) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
 end
