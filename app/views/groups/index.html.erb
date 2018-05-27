@@ -1,28 +1,32 @@
-<h1>Groups</h1>
-
 <div class="container">
+    <h1>Groups</h1>
     <div class="row">
         <div class="col">
             <%= form_with scope: :group, url: groups_path, local: true do |form| %>
-            <p>
-                <%= form.label :name %><br>
-                <%= form.text_field :name %>
-            </p>
-            
-            <p>
-                <%= form.submit %>
-            </p>
-            <% end %>
+                <p>
+                    <%= form.label :name %>
+                        <br>
+                        <%= form.text_field :name %>
+                </p>
 
-            <% @groups.each do |group| %>
-                <p><%= group.name%> [user <%= group.owner_id%>]</p>
-            <% end %>
+                <p>
+                    <%= form.submit %>
+                </p>
+                <% end %>
+
+                    <% @groups.each do |group| %>
+                        <p>
+                            <%= group.name%> [user
+                                <%= group.owner_id%>]</p>
+                        <% end %>
         </div>
         <div class="col">
             gruop users
             <% @groups.each do |group| %>
-                <p><%= group.name%> [user <%= group.owner_id%>]</p>
-            <% end %>
+                <p>
+                    <%= group.name%> [user
+                        <%= group.owner_id%>]</p>
+                <% end %>
         </div>
     </div>
 </div>
