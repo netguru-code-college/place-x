@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_27_074103) do
+ActiveRecord::Schema.define(version: 2018_05_27_084448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.bigint "place_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["place_id"], name: "index_comments_on_place_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "groups", force: :cascade do |t|
     t.integer "owner_id"
@@ -25,16 +35,6 @@ ActiveRecord::Schema.define(version: 2018_05_27_074103) do
   create_table "groups_users", id: false, force: :cascade do |t|
     t.bigint "group_id", null: false
     t.bigint "user_id", null: false
-  end
-
-  create_table "comments", force: :cascade do |t|
-    t.text "body"
-    t.bigint "place_id"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["place_id"], name: "index_comments_on_place_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -63,4 +63,5 @@ ActiveRecord::Schema.define(version: 2018_05_27_074103) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
 end
