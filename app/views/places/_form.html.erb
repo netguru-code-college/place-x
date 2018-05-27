@@ -21,7 +21,6 @@
           map.setZoom(15);
       }
 
-<<<<<<< HEAD
       function initializeMap() {
           const INITIAL_LOCATION = new google.maps.LatLng(52.380263, 19.971452);
           const INITIAL_ZOOM = 6;
@@ -115,7 +114,8 @@
         </div>
 
         <div class="field">
-          <%= form.label :tag_list, "Your tags (separated by commas)" %><br/>
+          <%= form.label :tag_list, "Your tags (separated by commas)" %>
+          <br/>
           <%= form.text_field :tag_list, data: {load: @place_tags} %>
         </div>
 
@@ -132,18 +132,9 @@
     <div class="col">
       <div id="map_pick" style='width: 100%; height: 400px;'></div>
     </div>
-=======
-  <div class="field">
-    <%= form.label :tag_list, "Your tags (separated by commas)" %><br/>
-    <%= form.text_field :tag_list, data: {load: @place_tags} %>
-  </div>
-  
-  <div class="actions">
-    <%= form.submit %>
->>>>>>> Tags fixes
   </div>
 </div>
-
-
+<div>
+</div>
 </body>
 </html>
