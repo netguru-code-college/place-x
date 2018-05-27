@@ -13,7 +13,8 @@ class CommentsController < ApplicationController
 
   def create
     @place = Place.find(params[:place_id])
-    @comment = @place.comments.create!(comment_params.merge(user_id: current.user))
+    binding.pry
+    @comment = @place.comments.create!(comment_params.merge(user_id: current_user))
     redirect_to places_path(@place)
   end
 
