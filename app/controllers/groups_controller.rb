@@ -2,27 +2,27 @@
 
 class GroupsController < ApplicationController
   def index
-    render "show"
+    @groups = Group.where(owner_id: current_user.id) # TODO: tu trzeba bedzie dorzucic cos w stylu where owner_id = 1
   end
 
   def show
-    @groups = Group.all # tu trzeba bedzie dorzucic cos w stylu where owner_id = 1
+    
   end
 
   def new; end
 
   def create
     if current_user == nil
-      #redirect_to "index"
+      show
       return
     end
 
     @group = Group.new(groups_params.merge(owner_id: current_user.id))
 
     if @group.save
-      redirect_to @group
+      redirect_to action: "index"
     else
-      render "show"
+      show
     end
   end
 
@@ -33,6 +33,6 @@ class GroupsController < ApplicationController
   private
 
   def groups_params
-    params.require(:group).permit(:owner_id, :name)
+    params.require(:group).permit(:name)
   end
 end

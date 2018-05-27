@@ -50,6 +50,7 @@ GEM
     ast (2.4.0)
     autoprefixer-rails (8.5.1)
       execjs
+    bcrypt (3.1.12)
     bcrypt (3.1.12-x64-mingw32)
     better_errors (2.4.0)
       coderay (>= 1.0.0)
@@ -98,6 +99,7 @@ GEM
     diff-lcs (1.3)
     erubi (1.7.1)
     execjs (2.7.0)
+    ffi (1.9.23)
     ffi (1.9.23-x64-mingw32)
     formatador (0.2.5)
     globalid (0.4.1)
@@ -160,10 +162,13 @@ GEM
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
+    msgpack (1.2.4)
     msgpack (1.2.4-x64-mingw32)
     multi_json (1.13.1)
     nenv (0.3.0)
     nio4r (2.3.1)
+    nokogiri (1.8.2)
+      mini_portile2 (~> 2.3.0)
     nokogiri (1.8.2-x64-mingw32)
       mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
@@ -173,6 +178,7 @@ GEM
     parallel (1.12.1)
     parser (2.5.1.0)
       ast (~> 2.4.0)
+    pg (1.0.0)
     pg (1.0.0-x64-mingw32)
     popper_js (1.12.9)
     powerpack (0.1.1)
@@ -294,6 +300,7 @@ GEM
       nokogiri (~> 1.8)
 
 PLATFORMS
+  ruby
   x64-mingw32
 
 DEPENDENCIES
@@ -329,4 +336,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
