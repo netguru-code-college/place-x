@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get "groups/index"
 
-  resources :groups
+  resources :groups do
+  	post :add_user
+  end
 
   root "groups#show"
 end

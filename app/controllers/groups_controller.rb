@@ -7,7 +7,10 @@ class GroupsController < ApplicationController
     @groups = Group.where(owner_id: current_user.id) # TODO: tu trzeba bedzie dorzucic cos w stylu where owner_id = 1
   end
 
-  def show; end
+  def show
+    @group = Group.find(params[:id])
+
+  end
 
   def new; end
 
@@ -20,6 +23,7 @@ class GroupsController < ApplicationController
     @group = Group.new(groups_params.merge(owner_id: current_user.id))
 
     if @group.save
+      @group.users << current_user
       redirect_to action: "index"
     else
       show
@@ -27,7 +31,15 @@ class GroupsController < ApplicationController
   end
 
   def add_user
-    # potrzebna relacja do userow
+    @group = Group.find(params[:group_id])
+    @founded_user = User.find_by(display_name: params["name"])
+
+    if @founded_user != nil
+      @group.users << @founded_user
+
+    end
+    redirect_to group_path(@group.id)
+
   end
 
   private
