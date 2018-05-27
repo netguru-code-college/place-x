@@ -1,3 +1,39 @@
-<h1>Added but not quite</h1>
 
-    <p>Some error</p>
+<div class="container">
+
+		<h2><%= @group.name %></h2>
+		<hr>
+
+
+            <%= form_with url: group_add_user_path(@group) do |form| %>
+            <p>
+                <%= form.label :name, "User name" %><br>
+                <%= form.text_field :name %>
+            </p>
+            
+            <p>
+                <%= form.submit class: "btn btn-success"%>
+            </p>
+            <% end %>
+
+
+
+            
+            <table class="table">
+            	  <thead>
+    <tr>
+      <th scope="col">Users</th>
+    </tr>
+  </thead>
+    <tbody>
+
+            <% @group.users.each do |user| %>
+                <td><%= user.display_name%></td>
+            <% end %>
+        </tbody>
+        </table>
+    </div>
+
+
+
+</div>
