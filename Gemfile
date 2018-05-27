@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 5.2.0"
-# Use sqlite3 as the database for Active Record
+# use postgresql as database
 gem "pg"
 # Use Puma as the app server
 gem "puma", "~> 3.11"
@@ -16,6 +16,10 @@ gem "uglifier", ">= 1.3.0"
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
+# use acts as taggable on to provide tags for places
+gem 'acts-as-taggable-on'
+gem 'jquery-ui-rails'
+gem 'rails-jquery-autocomplete'
 # Use CoffeeScript for .coffee assets and views
 gem "coffee-rails", "~> 4.2"
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

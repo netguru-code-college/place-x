@@ -113,6 +113,11 @@
           <%= form.text_field :lng %>
         </div>
 
+        <div class="field">
+          <%= form.label :tag_list, "Your tags (separated by commas)" %><br/>
+          <%= form.text_field :tag_list, data: {load: @place_tags} %>
+        </div>
+
         <br>
 
         <div class="actions">
