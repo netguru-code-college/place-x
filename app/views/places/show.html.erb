@@ -21,6 +21,14 @@
   <strong>Lng:</strong>
   <%= @place.lng %>
 </p>
+<p>
+  <b>Name:</b>
+  <%= @place.name %>
+  <br>
+  <b>Tags:</b>
+  <%= raw @place.tag_list.join(', ') %>
+</p>
+
 
 <%= link_to 'Edit', edit_place_path(@place) %> 
 <hr>
