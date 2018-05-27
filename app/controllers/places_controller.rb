@@ -31,9 +31,14 @@ class PlacesController < ApplicationController
   # POST /places
   # POST /places.json
   def create
-    @place = Place.new(place_params)
+
+
+    @place = Place.new(place_params.except(:tag_list))
+    # binding.pry
     respond_to do |format|
       if @place.save
+        @place.tag_list.add(place_params[:tag_list])
+        @place.save
         format.html { redirect_to @place, notice: "Place was successfully created." }
         format.json { render :show, status: :created, location: @place }
       else
@@ -50,6 +55,7 @@ class PlacesController < ApplicationController
     respond_to do |format|
       if @place.update(place_params)
         @place.tag_list.add(place_params[:tag_list])
+        @place.save
         format.html { redirect_to @place, notice: "Place was successfully updated." }
         format.json { render :show, status: :ok, location: @place }
       else
