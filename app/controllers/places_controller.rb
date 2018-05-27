@@ -2,6 +2,7 @@
 
 class PlacesController < ApplicationController
   before_action :set_place, only: [:show, :edit, :update, :destroy]
+  before_action :initialize_markers, only: [:index]
 
   # GET /places
   # GET /places.json
@@ -11,7 +12,9 @@ class PlacesController < ApplicationController
 
   # GET /places/1
   # GET /places/1.json
-  def show; end
+  def show
+    # no-op
+  end
 
   # GET /places/new
   def new
@@ -19,7 +22,9 @@ class PlacesController < ApplicationController
   end
 
   # GET /places/1/edit
-  def edit; end
+  def edit
+    # no-op
+  end
 
   # POST /places
   # POST /places.json
@@ -62,6 +67,13 @@ class PlacesController < ApplicationController
   end
 
   private
+
+  def initialize_markers
+    @markers = Gmaps4rails.build_markers(Place.all) do |place, marker|
+      marker.lat place.lat
+      marker.lng place.lng
+    end
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_place

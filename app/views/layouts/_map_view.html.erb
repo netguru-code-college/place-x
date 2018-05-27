@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PlaceX</title>
+
+  <script src="//maps.googleapis.com/maps/api/js?libraries=places&key=<%= raw ENV['MAPS_API_KEY'] %>"></script>
+  <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+  <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> <!-- only if you need custom infoboxes -->
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <script type="text/javascript">
+      function initializeMap() {
+          var handler = Gmaps.build('Google');
+          handler.buildMap({internal: {id: 'basic_map'}}, function () {
+              var markers = handler.addMarkers(<%= raw markers %>);
+              handler.bounds.extendWith(markers);
+              handler.fitMapToBounds();
+          });
+      }
+
+      window.onload = initializeMap;
+  </script>
+</head>
+<body>
+<div style="width: 900px; height: 100px;">
+  <div id="basic_map" style='width: 800px; height: 400px;'></div>
+</div>
+</body>
+</html>
