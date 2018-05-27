@@ -1,3 +1,5 @@
+
+<div class="container">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -20,5 +22,29 @@
   <%= @place.lng %>
 </p>
 
-<%= link_to 'Edit', edit_place_path(@place) %> |
+<%= link_to 'Edit', edit_place_path(@place) %> 
+
+<h2>Comments</h2>
+<% @place.comments.each do |comment| %>
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+<% end %>
+
+<h2>Add a comment:</h2>
+<%= form_with(model: [ @place, @place.comments.build ], local: true) do |form| %>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+
+  
+<% end %>
+
 <%= link_to 'Back', places_path %>
+
+</div>
