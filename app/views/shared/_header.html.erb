@@ -19,7 +19,13 @@
         </ul>
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Logowanie/Rejestracja</a>
+
+                  <% if current_user %> 
+                    <%= current_user[:display_name] %>
+                    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+                    <% else %>
+                        <%= link_to "Login", new_user_session_path, method: :get, class: "nav-link" %>
+                  <% end %>
             </li>
         </ul>
     </div>

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PlacesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_place, only: [:show, :edit, :update, :destroy]
   before_action :initialize_markers, only: [:index]
 
