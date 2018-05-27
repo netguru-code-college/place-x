@@ -5,9 +5,7 @@ class GroupsController < ApplicationController
     @groups = Group.where(owner_id: current_user.id) # TODO: tu trzeba bedzie dorzucic cos w stylu where owner_id = 1
   end
 
-  def show
-    
-  end
+  def show; end
 
   def new; end
 
