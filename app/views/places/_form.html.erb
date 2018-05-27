@@ -1,37 +1,136 @@
-<%= form_with(model: place, local: true) do |form| %>
-  <% if place.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(place.errors.count, "error") %> prohibited this place from being saved:</h2>
+<html>
+<head>
+  <title>PlaceX - Choose place</title>
 
-      <ul>
-      <% place.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+  <script type="text/javascript">
+
+      let marker = null;
+
+      function placeMarkerAndPanTo(latLng, map) {
+          if (marker != null)
+              marker.setMap(null);
+          marker = new google.maps.Marker({
+              position: latLng,
+              map: map
+          });
+          map.panTo(latLng);
+      }
+
+      function zoomToLocation(location, map) {
+          map.panTo(location);
+          map.setZoom(15);
+      }
+
+      function initializeMap() {
+          const INITIAL_LOCATION = new google.maps.LatLng(52.380263, 19.971452);
+          const INITIAL_ZOOM = 6;
+
+          const handler = Gmaps.build('Google');
+
+          handler.buildMap({
+              internal: {id: 'map_pick'},
+              provider: {
+                  zoom: INITIAL_ZOOM,
+                  center: INITIAL_LOCATION,
+              }
+          }, function () {
+
+              handler.getMap().addListener('click', function (event) {
+                  const latitude = event.latLng.lat();
+                  const longitude = event.latLng.lng();
+                  console.log(latitude + ', ' + longitude);
+
+                  document.getElementById("place_lat").value = latitude;
+                  document.getElementById("place_lng").value = longitude;
+
+                  placeMarkerAndPanTo(event.latLng, handler.getMap())
+              });
+
+
+              navigator.geolocation.getCurrentPosition(position => {
+                  console.log(position);
+                  const actualLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                  zoomToLocation(actualLocation, handler.getMap())
+              }, () => {
+                  const locationWarsaw = new google.maps.LatLng(52.248465, 21.013638);
+                  zoomToLocation(locationWarsaw, handler.getMap())
+              });
+
+          });
+      }
+
+      $(document).ready(initializeMap);
+      $(document).on('page:load', initializeMap); // Classic Turbolinks
+      $(document).on('turbolinks:load', initializeMap); // Turbolinks 5
+  </script>
+
+  <style>
+    input {
+      width: 100%;
+    }
+
+    #map_pick {
+      height: 100%;
+    }
+  </style>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= form_with(model: place, local: true) do |form| %>
+
+        <h1>New Place</h1>
+
+        <% if place.errors.any? %>
+          <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Something went wrong!</h4>
+
+            <% place.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <%= form.label :name %>
+          <%= form.text_field :name %>
+        </div>
+
+        <div class="field">
+          <%= form.label :description %>
+          <%= form.text_field :description %>
+        </div>
+
+        <div class="field">
+          <%= form.label :lat %>
+          <%= form.text_field :lat %>
+        </div>
+
+        <div class="field">
+          <%= form.label :lng %>
+          <%= form.text_field :lng %>
+        </div>
+
+        <br>
+
+        <div class="actions">
+          <%= form.submit class: "btn btn-success btn-block" %>
+          <%= link_to 'Back', places_path, class: "btn btn-primary btn-block" %>
+        </div>
+
+
       <% end %>
-      </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <div class="col">
+      <div id="map_pick" style='width: 100%; height: 400px;'></div>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
 
-  <div class="field">
-    <%= form.label :lat %>
-    <%= form.text_field :lat %>
-  </div>
-
-  <div class="field">
-    <%= form.label :lng %>
-    <%= form.text_field :lng %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</body>
+</html>

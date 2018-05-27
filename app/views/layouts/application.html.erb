@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>PlaceX</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <title>PlaceX</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <script src="//maps.googleapis.com/maps/api/js?libraries=places&key=<%= raw ENV['MAPS_API_KEY'] %>"></script>
+  <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+</head>
 
 
-  <body>
-  
+<body>
+
 <%= render "shared/header" %>
-    <%= yield %>
+<%= yield %>
 
-    <%= render "shared/footer" %>
-  </body>
+<%= render "shared/footer" %>
+</body>
 </html>

@@ -73,6 +73,7 @@ class PlacesController < ApplicationController
     @markers = Gmaps4rails.build_markers(Place.all) do |place, marker|
       marker.lat place.lat
       marker.lng place.lng
+      marker.infowindow place.name
     end
   end
 
