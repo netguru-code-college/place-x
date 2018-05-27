@@ -12,7 +12,8 @@ class PlacesController < ApplicationController
 
   # GET /places/1
   # GET /places/1.json
-  def show;
+  def show
+    # no-op
   end
 
   # GET /places/new
@@ -45,11 +46,11 @@ class PlacesController < ApplicationController
   def update
     respond_to do |format|
       if @place.update(place_params)
-        format.html {redirect_to @place, notice: "Place was successfully updated."}
-        format.json {render :show, status: :ok, location: @place}
+        format.html { redirect_to @place, notice: "Place was successfully updated." }
+        format.json { render :show, status: :ok, location: @place }
       else
-        format.html {render :edit}
-        format.json {render json: @place.errors, status: :unprocessable_entity}
+        format.html { render :edit }
+        format.json { render json: @place.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -59,8 +60,8 @@ class PlacesController < ApplicationController
   def destroy
     @place.destroy
     respond_to do |format|
-      format.html {redirect_to places_url, notice: "Place was successfully destroyed."}
-      format.json {head :no_content}
+      format.html { redirect_to places_url, notice: "Place was successfully destroyed." }
+      format.json { head :no_content }
     end
   end
 
